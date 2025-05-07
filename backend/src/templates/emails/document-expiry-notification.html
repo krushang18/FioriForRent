@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Expiry Alert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #0081C9;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .content {
+      padding: 20px;
+      background-color: #F8F9FA;
+    }
+    .footer {
+      background-color: #212529;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+    }
+    .alert {
+      background-color: #FFC93C;
+      border-left: 4px solid #FF6347;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+    }
+    .urgent {
+      background-color: #FF6347;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #0081C9;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .days-count {
+      font-size: 20px;
+      font-weight: bold;
+      color: #FF6347;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #0081C9;
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+    td {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Document Expiry Alert</h1>
+    </div>
+    <div class="content">
+      <p>Dear Admin,</p>
+      
+      {{#if isUrgent}}
+      <div class="alert">
+        <strong>Urgent Attention Required:</strong> The following machine document will expire <span class="days-count">{{daysBefore}}</span> days from now.
+        {{#if sameDay}}
+        <div class="urgent">EXPIRES TODAY!</div>
+        {{/if}}
+      </div>
+      {{else}}
+      <p>This is a reminder that the following machine document will expire in <span class="days-count">{{daysBefore}}</span> days.</p>
+      {{/if}}
+      
+      <table>
+        <tr>
+          <th colspan="2">Document Details</th>
+        </tr>
+        <tr>
+          <td><strong>Machine:</strong></td>
+          <td>{{document.machine.name}}</td>
+        </tr>
+        <tr>
+          <td><strong>Document Type:</strong></td>
+          <td>{{document.document_type}}</td>
+        </tr>
+        <tr>
+          <td><strong>Expiry Date:</strong></td>
+          <td>{{formatDate document.expiry_date}}</td>
+        </tr>
+        <tr>
+          <td><strong>Last Renewed:</strong></td>
+          <td>{{#if document.last_renewed_date}}{{formatDate document.last_renewed_date}}{{else}}N/A{{/if}}</td>
+        </tr>
+        {{#if document.remarks}}
+        <tr>
+          <td><strong>Remarks:</strong></td>
+          <td>{{document.remarks}}</td>
+        </tr>
+        {{/if}}
+      </table>
+      
+      <p>Please ensure the document is renewed before its expiry date to maintain compliance with regulations.</p>
+      
+      <center>
+        <a href="{{adminUrl}}/machine-documents/{{document.id}}" class="btn">View Document Details</a>
+      </center>
+      
+      <p>After renewing the document, please update the expiry date in the system to avoid further notifications.</p>
+    </div>
+    <div class="footer">
+      <p>&copy; {{currentYear}} {{company.company_name}} | {{company.address}} | {{company.phone}} | {{company.email}}</p>
+    </div>
+  </div>
+</body>
+</html>

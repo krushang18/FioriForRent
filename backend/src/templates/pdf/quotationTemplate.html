@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation - {{quotation.quotation_number}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .quotation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 15px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0081C9;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .logo {
+            max-height: 100px;
+            max-width: 220px;
+        }
+        .quotation-title {
+            color: #0081C9;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-align: right;
+        }
+        .quotation-details {
+            text-align: right;
+            font-size: 12px;
+        }
+        .company-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .company-box {
+            width: 98%;
+            background-color: #F8F9FA;
+            padding: 10px;
+            border-left: 4px solid #0081C9;
+            min-height: 140px;
+            display: inline-block;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+        .company-box h3 {
+            color: #0081C9;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .company-box p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        .items-section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            background-color: #FFC93C;
+            color: #333;
+            text-align: center;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+        .items-table th {
+            background-color: #0081C9;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+        .items-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+        }
+        .items-table .item-name {
+            font-weight: bold;
+        }
+        .items-table .item-description {
+            color: #666;
+            font-size: 11px;
+        }
+        .totals {
+            text-align: right;
+            margin-bottom: 20px;
+            padding-right: 10px;
+        }
+        .subtotal, .gst {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .grand-total {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .amount-words {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+        }
+        .terms-section {
+            background-color: #F8F9FA;
+            padding: 10px;
+            border-left: 4px solid #0081C9;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .terms-section h3 {
+            color: #0081C9;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .terms-section ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .terms-section li {
+            margin-bottom: 5px;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            font-size: 12px;
+        }
+        .contact-info {
+            width: 48%;
+        }
+        .signature {
+            width: 48%;
+            text-align: right;
+        }
+        .signature img {
+            max-height: 80px;
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 20px;
+            font-size: 10px;
+            color: #666;
+        }
+        .notes {
+            font-size: 12px;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #fffdf0;
+        }
+    </style>
+</head>
+<body>
+    <div class="quotation-container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                {{#if company.logo_url}}
+                <img src="{{company.logo_url}}" alt="Company Logo" class="logo">
+                {{else}}
+                <h2 style="color: #0081C9; margin: 0;">{{company.company_name}}</h2>
+                {{/if}}
+            </div>
+            <div>
+                <h1 class="quotation-title">QUOTATION</h1>
+                <div class="quotation-details">
+                    <p>
+                        <strong>Quotation Number:</strong> {{quotation.quotation_number}}<br>
+                        <strong>Date:</strong> {{quotation.quotation_date}}<br>
+                        <strong>Valid Until:</strong> {{quotation.valid_until}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Details -->
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td width="48%" style="vertical-align: top;">
+                    <div class="company-box">
+                        <h3>Quotation By</h3>
+                        <p>
+                            <strong>{{company.company_name}}</strong><br>
+                            GST No: {{company.gst_number}}<br>
+                            Email: {{company.email}}<br>
+                            Phone: {{company.phone}}<br>
+                            Address: {{company.address}}
+                        </p>
+                    </div>
+                </td>
+                <td width="2%"></td>
+                <td width="50%" style="vertical-align: top;">
+                    <div class="company-box">
+                        <h3>Quotation To</h3>
+                        <p>
+                            <strong>{{customer.company_name}}</strong><br>
+                            {{#if customer.contact_person}}Contact: {{customer.contact_person}}<br>{{/if}}
+                            {{#if customer.email}}Email: {{customer.email}}<br>{{/if}}
+                            {{#if customer.phone}}Phone: {{customer.phone}}<br>{{/if}}
+                            {{#if customer.address}}Address: {{customer.address}}<br>{{/if}}
+                            {{#if customer.site_location}}Site: {{customer.site_location}}<br>{{/if}}
+                            GST No: {{#if customer.gst_number}}{{customer.gst_number}}{{else}}N/A{{/if}}
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Quotation Items -->
+        <div class="items-section">
+            <div class="section-title">Quotation Items</div>
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">S.No</th>
+                        <th style="width: 35%;">Machine/Description</th>
+                        <th style="width: 15%;">Duration</th>
+                        <th style="width: 8%;">Qty</th>
+                        <th style="width: 12%;">Unit Price</th>
+                        <th style="width: 10%;">GST %</th>
+                        <th style="width: 15%;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each items}}
+                    <tr>
+                        <td style="text-align: center;">{{index}}</td>
+                        <td>
+                            <div class="item-name">{{name}}</div>
+                            {{#if description}}<div class="item-description">{{description}}</div>{{/if}}
+                        </td>
+                        <td>{{duration}}</td>
+                        <td style="text-align: center;">{{quantity}}</td>
+                        <td style="text-align: right;">₹{{unit_price}}</td>
+                        <td style="text-align: center;">{{gst_percentage}}%</td>
+                        <td style="text-align: right;">₹{{subtotal}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="totals">
+            <div class="subtotal">Subtotal: ₹{{quotation.total_amount}}</div>
+            <div class="gst">GST ({{quotation.gst_percentage}}%): ₹{{quotation.gst_amount}}</div>
+            <div class="grand-total">Grand Total: ₹{{quotation.grand_total}}</div>
+            <div class="amount-words">{{quotation.total_amount_words}}</div>
+        </div>
+
+        <!-- Notes if available -->
+        {{#if quotation.notes}}
+        <div class="notes">
+            <strong>Notes:</strong> {{quotation.notes}}
+        </div>
+        {{/if}}
+
+        <!-- Terms and Conditions -->
+        <div class="terms-section">
+            <h3>Terms and Conditions</h3>
+            <ol>
+                {{#each terms}}
+                <li>
+                    <strong>{{termsCondition.title}}</strong>
+                    {{#if termsCondition.description}}
+                    <div>{{termsCondition.description}}</div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+
+        <!-- Signature Section -->
+<!-- Footer -->
+<div style="margin-top: 30px;">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td width="40%" style="vertical-align: top; font-size: 12px; color: #666;">
+                For any inquiries, contact:<br>
+                Phone: {{company.phone}}<br>
+                Email: {{company.email}}
+            </td>
+            <td width="60%" style="vertical-align: top; text-align: right;">
+                {{#if company.signature_url}}
+                <img src="{{company.signature_url}}" alt="Authorized Signature" style="max-height: 60px; margin-bottom: 5px;">
+                {{/if}}
+                <div style="font-weight: bold;">Authorized Signature</div>
+                <div>{{company.company_name}}</div>
+            </td>
+        </tr>
+    </table>
+</div>
+    </div>
+</body>
+</html>
