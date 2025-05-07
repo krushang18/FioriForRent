@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Customer Query</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #0081C9;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .content {
+      padding: 20px;
+      background-color: #F8F9FA;
+    }
+    .footer {
+      background-color: #212529;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+    }
+    .highlight {
+      background-color: #FFC93C;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #0081C9;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .alert {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>New Customer Query</h1>
+    </div>
+    <div class="content">
+      <div class="alert">
+        ACTION REQUIRED: New customer query has been received!
+      </div>
+      
+      <p>A new customer query has been submitted to the system. Please review the details below:</p>
+      
+      <div class="highlight">
+        <h3>Query Details:</h3>
+        <p><strong>Company:</strong> {{query.company_name}}</p>
+        <p><strong>Email:</strong> {{query.email}}</p>
+        <p><strong>Contact Number:</strong> {{query.contact_number}}</p>
+        <p><strong>Site Location:</strong> {{query.site_location}}</p>
+        <p><strong>Duration Needed:</strong> {{query.duration}}</p>
+        <p><strong>Work Description:</strong> {{query.work_description}}</p>
+        <p><strong>Received On:</strong> {{date}}</p>
+      </div>
+      
+      <p>Please log in to the admin dashboard to review and respond to this query.</p>
+      
+      <center>
+        <a href="{{adminUrl}}" class="btn">View in Dashboard</a>
+      </center>
+      
+      <p>Remember: Our SLA requires a response within 24 hours.</p>
+    </div>
+    <div class="footer">
+      <p>This is an automated notification. Please do not reply to this email.</p>
+    </div>
+  </div>
+</body>
+</html>
